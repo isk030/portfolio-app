@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: node:20-bookworm-slim
+    runs-on: ubuntu:latest
 
     strategy:
       matrix:
