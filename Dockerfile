@@ -32,3 +32,15 @@ ENV NODE_ENV=development
 RUN yarn install 
 COPY . .
 CMD yarn dev
+
+FROM cypress/included as test
+WORKDIR /app
+
+ENV NODE_ENV=test
+RUN yarn install
+COPY . .
+RUN yarn build
+RUN yarn test
+RUN yarn e2e:headless
+RUN yarn component:headless
+CMD yarn start
