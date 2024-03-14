@@ -35,10 +35,9 @@ CMD yarn dev
 
 FROM cypress/included as test
 WORKDIR /app
-
 ENV NODE_ENV=test
-RUN yarn install
 COPY . .
+RUN yarn install
 RUN yarn build
 RUN yarn test
 RUN yarn e2e:headless
