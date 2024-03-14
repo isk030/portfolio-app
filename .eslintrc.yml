@@ -1,0 +1,82 @@
+parser: '@typescript-eslint/parser'
+env:
+  browser: true
+  es6: true
+  node: true
+  jest: true
+  jquery: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+  - 'plugin:@next/next/recommended'
+  - prettier
+plugins:
+  - react
+  - react-hooks
+rules:
+  no-duplicate-imports:
+    - error
+  no-self-compare:
+    - error
+  no-shadow:
+    - off
+  '@typescript-eslint/no-shadow':
+    - error
+    - {
+        builtinGlobals: false,
+        hoist: 'never',
+        ignoreOnInitialization: true,
+        allow: ['InputProps'],
+      }
+  eqeqeq:
+    - error
+  no-console:
+    - error
+  max-params:
+    - error
+  no-eval:
+    - error
+  no-return-await:
+    - error
+  no-var:
+    - error
+  prefer-const:
+    - error
+  'react-hooks/rules-of-hooks':
+    - error
+  '@typescript-eslint/array-type':
+    - error
+    - { default: 'generic' }
+overrides:
+  [
+    {
+      files: ['*.ts', '*.tsx'],
+      parserOptions: { project: ['./tsconfig.json'] },
+      rules:
+        {
+          '@typescript-eslint/no-misused-promises':
+            [
+              'error',
+              {
+                'checksVoidReturn':
+                  { 'attributes': false, 'properties': false },
+              },
+            ],
+        },
+    },
+    {
+      files: ['**/*.stories.*'],
+      rules:
+        { 'import/no-anonymous-default-export': 'off', 'no-console': 'off' },
+    },
+    {
+      files: ['**/*.test.*'],
+      rules:
+        {
+          'import/no-anonymous-default-export': 'off',
+          '@typescript-eslint/await-thenable': 'off',
+          'no-console': 'off',
+        },
+    },
+  ]
